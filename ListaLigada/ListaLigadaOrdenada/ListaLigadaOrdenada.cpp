@@ -129,6 +129,7 @@ void inserirElemento()
 	if (primeiro == NULL)
 	{
 		primeiro = novo;
+		ultimo = novo;
 	}
 	else
 	{
@@ -140,29 +141,38 @@ void inserirElemento()
 void excluirElemento()
 {
 	int excluir;
-	cout << "Qual elemento deseja excluir?";
-	cin >> excluir;
+	NO *aux;
+	NO *antes;
+	
+	aux= primeiro;
+	antes = primeiro;
 
-	NO* atual = primeiro;
-	NO* anterior = NULL;
-
-	while (atual != NULL && atual->valor != excluir) {
-		anterior = atual;
-		atual = atual->prox;
-	}
-
-	if (atual == NULL) {
-		cout << "Elemento nao encontrado " << endl;
-		return;
-	}
-
-	if (anterior == NULL) {
-		primeiro = atual->prox;
+	if (aux == NULL) {
+		cout << "Lista vazia\n";
 	}
 	else {
-		anterior->prox = atual->prox;
-		free(atual);
-		cout << " Elemento excluido com sucesso" << endl;
+		cout << "Digite o elemento que deseja excluir: ";
+		cin >> excluir;
+
+		while (aux != NULL) {
+			if (aux->valor == excluir) {
+				if (aux == primeiro) {
+					primeiro = aux->prox;
+					break;
+				}
+				else {
+					antes->prox = aux->prox;
+					break;
+				}
+
+				free(aux);
+				cout << "excluido";
+			
+			}
+
+			antes = aux;
+			aux = aux->prox;
+		}
 	}
 }
 
