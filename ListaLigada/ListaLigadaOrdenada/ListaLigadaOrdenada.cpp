@@ -115,7 +115,7 @@ void exibirElementos()
 
 void inserirElemento()
 {
-	// aloca memoria dinamicamente para o novo elemento
+
 	NO* novo = (NO*)malloc(sizeof(NO));
 	if (novo == NULL)
 	{
@@ -131,10 +131,36 @@ void inserirElemento()
 		primeiro = novo;
 		ultimo = novo;
 	}
-	else
-	{
-		ultimo->prox = novo;
-		ultimo = novo;
+	else {
+		
+		NO* atual = primeiro;
+		NO* antes = NULL;
+
+		
+		while (atual != NULL && atual->valor < novo->valor) {
+			antes = atual;
+			atual = atual->prox;
+		}
+
+		if (atual != NULL && atual->valor == novo->valor) {
+			cout << "Elemento já existe na lista\n";
+			free(novo); 
+			return;
+		}
+
+		if (antes == NULL) {
+			novo->prox = primeiro;
+			primeiro = novo;
+		}
+		
+		else {
+			antes->prox = novo;
+			novo->prox = atual;
+		}
+
+		if (novo->prox == NULL) {
+			ultimo = novo;
+		}
 	}
 }
 
