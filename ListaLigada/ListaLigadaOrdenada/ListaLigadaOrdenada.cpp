@@ -208,13 +208,21 @@ void buscarElemento()
 	cout << "Digite o elemento que deseja buscar; ";
 	cin >> busca;
 
-	NO* encontrei = posicaoElemento(busca);
+	NO* aux = primeiro;
 
-	if (encontrei == NULL) {
+	while (aux != NULL) {
+		if (aux->valor == busca) {
+			break;
+		}
+		aux = aux->prox;
+	}
+
+
+	if (aux == NULL) {
 		cout << "Elemento nao encontrado" << endl;
 	}
 	else {
-		cout << "O elemento foi encontrado: " << encontrei->valor << endl;
+		cout << "O elemento foi encontrado: " << aux->valor << endl;
 	}
 
 }
